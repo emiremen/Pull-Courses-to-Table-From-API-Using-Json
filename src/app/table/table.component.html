@@ -1,0 +1,98 @@
+<h3>{{tableTitle}}</h3>
+
+<nz-table #basicTable [nzData]="courses" [nzFrontPagination]="false">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Business Name</th>
+            <th>Business ID</th>
+            <th>List Price</th>
+            <th>Discounted Price</th>
+            <th>Description</th>
+            <th>Session Date</th>
+            <th>Participants</th>
+            <th>Picture</th>
+            <th>Action</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of courses; let i = index" #courseRow>
+            <ng-container *ngIf="course.active == true; else noBlock;">
+                <td #courseTitle>{{course.title}}</td>
+                <td>{{course.businessName}}</td>
+                <td>{{course.businessId}}</td>
+                <td>{{course.listPrice}}</td>
+                <td>{{course.discountedPrice}}</td>
+                <td>{{course.description}}</td>
+                <td>{{course.sessionDate | date}}</td>
+                <td ngDefaultControl nz-popover nzPopoverTitle="Note"
+                    nzPopoverContent="{{courses[courseRow.rowIndex-1].courseNotes}}"
+                    (onmouseover)="popoverVisibileOver()" [(ngModel)]="popoverVisible">{{course.participants}}</td>
+                <td><img src="{{ course.pictureUrl }}" height="100px" width="200px"></td>
+                <td>
+                    <div style="display: flex;justify-content: center;">
+                        <button nz-button [nzType]="'primary'"
+                            (click)="showModal(courseRow.rowIndex, courses[courseRow.rowIndex-1].title, courses[courseRow.rowIndex-1].businessId)">Edit</button>
+
+                        <button nz-button [nzType]="'primary'" nzDanger
+                            (click)="deleteTableRow(courseRow.rowIndex)">Delete</button>
+                    </div>
+                </td>
+
+                <td>{{course.active ? "Active" : "Inactive"}}</td>
+
+            </ng-container>
+            <ng-template #noBlock>
+                <td #courseTitle>{{course.title}}</td>
+                <td colspan="8" style=""> <app-inactive-course></app-inactive-course></td>
+                <td>
+                    <div style="display: flex;justify-content: center;">
+                        <button nz-button [nzType]="'primary'"
+                            (click)="showModal(courseRow.rowIndex, courses[courseRow.rowIndex-1].title, courses[courseRow.rowIndex-1].businessId)">Edit</button>
+
+                        <button nz-button [nzType]="'primary'" nzDanger
+                            (click)="deleteTableRow(courseRow.rowIndex)">Delete</button>
+                    </div>
+                </td>
+            </ng-template>
+        </tr>
+        <nz-modal [(nzVisible)]="isVisible" nzTitle="Edit Course" (nzOnCancel)="handleCancel()" nzMask="true"
+            (nzOnOk)="handleOk()" nzOkText="OK" nzCancelText="Cancel">
+            <ng-container *nzModalContent>
+                <strong>Name: </strong>
+                <p>{{modalTitle}}</p>
+                <strong>ID: </strong>
+                <p>{{modalBusinessId}}</p>
+
+
+                <form nz-form>
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="5" nzFor="courseParticipants">Participants</nz-form-label>
+                        <nz-form-control [nzSpan]="14">
+                            <input nz-input [ngModelOptions]="{standalone: true}" placeholder="0"
+                                [(ngModel)]="courseParticipants" style="width:100%;" value="{{courseParticipants}}">
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-label nzFor="courseNotes" [nzSpan]="5">Add Note</nz-form-label>
+                        <nz-form-control [nzSpan]="12">
+                            <textarea nz-input rows="4" cols="36" [(ngModel)]="courseNotes"
+                                [ngModelOptions]="{standalone: true}"
+                                placeholder="Add description"> {{courseNotes}}</textarea>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control [nzOffset]="5">
+                            <label nz-checkbox style="width:100%;" [(ngModel)]="courseStatus"
+                                [ngModelOptions]="{standalone: true}">Status: {{courseStatus ?
+                                'Active' : 'Inactive'}}</label>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                </form>
+
+            </ng-container>
+        </nz-modal>
+    </tbody>
+</nz-table>
