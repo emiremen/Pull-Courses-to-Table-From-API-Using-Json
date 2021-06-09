@@ -17,6 +17,8 @@ I used the NG-ZORRO design library for frontend.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
 
+To access NG-ZORRO desigh library:  [NG-ZORRO](https://ng.ant.design/).
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
