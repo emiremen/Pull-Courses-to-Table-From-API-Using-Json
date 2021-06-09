@@ -1,4 +1,19 @@
-# HiceleratePancake
+# Pull Courses Table From API Using Json
+
+
+>### Angular & NG-ZORRO
+
+An example Angular project I made for Hicelerate company to recruitment.
+
+I used the NG-ZORRO design library for frontend.
+
+## Screenshots
+
+![screenshots](https://github.com/emiremen/courses-table-from-json/blob/main/screenshots/ss1.png)
+
+![screenshots](https://github.com/emiremen/courses-table-from-json/blob/main/screenshots/ss2.png)
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
 
