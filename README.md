@@ -3,9 +3,9 @@
 
 >### Angular & NG-ZORRO
 
-An example Angular project I made for Hicelerate company to recruitment.
+An example **[Angular](https://github.com/angular/angular-cli)** project I made for Hicelerate company to recruitment.
 
-I used the NG-ZORRO design library for frontend.
+I used the **[NG-ZORRO](https://ng.ant.design/)** design library for frontend.
 
 ## Screenshots
 
